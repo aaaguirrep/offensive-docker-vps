@@ -1,0 +1,5 @@
+all:
+  children:
+    lab:
+      hosts:
+        x.x.x.x:

@@ -1,0 +1,53 @@
+---
+- hosts: lab
+  become: true
+  vars_files:
+    - vars/default.yaml
+
+  tasks:
+    - name: Test connection
+      ping:
+        data: Connection successful
+      tags:
+         - connection
+
+    - name: Update and install packages
+      apt:
+        name: [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common' , 'python3-pip', 'virtualenv', 'python3-setuptools']
+        state: present
+        update_cache: yes
+
+    - name: Add docker GPG apt key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add docker repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: yes
+
+    - name: Adding user to docker group
+      user:
+        name: "{{ username }}"
+        groups: ["docker"]
+        append: yes
+    
+    - name: Install docker module for python
+      pip:
+        name: docker
+
+    - name: Download docker for pentest image
+      docker_image:
+        name: "{{ docker_image }}"
+        source: pull
+
+    - name: Configuration finished
+      debug:
+        msg: System configured correctly.
