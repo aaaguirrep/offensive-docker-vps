@@ -7,5 +7,5 @@ variable "ssh_public_key" {
 variable "username" {
     description = "Username"
     type = string
-    default = "username"
+    default = "pentest"
 }

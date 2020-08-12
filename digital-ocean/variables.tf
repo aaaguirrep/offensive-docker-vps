@@ -16,5 +16,5 @@ variable "region" {
 variable "username" {
     description = "Username"
     type = string
-    default = "username"
+    default = "pentest"
 }

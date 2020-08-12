@@ -1,6 +1,6 @@
 // Configure the Google Cloud provider
 provider "google" {
     credentials = file("../credentials/pentest.json")
-    project     = "docker-pentest"
+    project     = "project-id"
     region      = "us-central1"
 }
