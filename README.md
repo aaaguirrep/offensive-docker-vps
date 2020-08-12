@@ -3,7 +3,7 @@
 
 Create a VPS on Google Cloud Platform or Digital Ocean easily with the [docker for pentest](https://github.com/aaaguirrep/pentest) included to launch the assessment to the target.
 
-**Digital Ocean Bonus**
+:tada::tada:**Digital Ocean Bonus**:tada::tada:
 You can sign up with my referral link <https://m.do.co/c/0d2d40f6a8a1> and get $100 free credit to try it out!
 
 #### Table of contents
@@ -88,6 +88,8 @@ external_ip = x.x.x.x
 
 - Copy the external_ip value
 
+**Note:** The instance type and the region used are: n1-standard-1 and us-central1. You can change the values on server.tf and main.tf
+
 **Demo**
 [![asciicast](https://asciinema.org/a/352900.png)](https://asciinema.org/a/352900)
 
@@ -110,6 +112,8 @@ external_ip = x.x.x.x
 ```
 
 - Copy the external_ip value
+
+**Note:** The droplet type and the region used are: s-2vcpu-4gb and nyc3. You can change the values on server.tf and variables.tf
 
 **Demo**
 [![asciicast](https://asciinema.org/a/352901.png)](https://asciinema.org/a/352901)
@@ -151,6 +155,8 @@ $ ssh pentest@x.x.x.x -i ../credentials/pentest
 # Destroy the resource
 $ terraform destroy -auto-approve
 ```
+
+:warning:**Note:** For Digital Ocean, if you dont have a default VPC created in the region used it shows an error to destroy the VPC but no problem, it will destroy the others resources.
 
 ### :coffee: Donations
 
