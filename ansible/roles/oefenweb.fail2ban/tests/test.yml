@@ -1,0 +1,7 @@
+# test file for fail2ban
+---
+- hosts: localhost
+  connection: local
+  become: true
+  roles:
+    - ../../

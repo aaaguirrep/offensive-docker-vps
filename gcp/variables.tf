@@ -9,3 +9,9 @@ variable "username" {
     type = string
     default = "pentest"
 }
+
+variable "vps_number" {
+    description = "Number of VPS servers"
+    type = string
+    default = 1
+}

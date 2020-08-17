@@ -1,7 +1,7 @@
- resource "digitalocean_firewall" "traffic-ingress" {
+resource "digitalocean_firewall" "traffic-ingress" {
   name = "traffic-ingress"
 
-  droplet_ids = [digitalocean_droplet.vm_instance.id]
+  droplet_ids = digitalocean_droplet.vm_instance.*.id
 
   inbound_rule {
     protocol         = "tcp"
