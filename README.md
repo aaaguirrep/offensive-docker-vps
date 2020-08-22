@@ -21,6 +21,7 @@ You can sign up with my referral link <https://m.do.co/c/0d2d40f6a8a1> and get $
   - [4.- Ansible](#4--ansible)
   - [5.- Access to VPS](#5--access-to-vps)
   - [6.- Destroy the VPS](#6--destroy-the-vps)
+- [:shield: Security](#shield-security)
 - [:coffee: Donations](#coffee-donations)
 - [Contributing](#contributing)
 - [:chart_with_upwards_trend: Stargazers over time](#chart_with_upwards_trend-stargazers-over-time)
@@ -28,8 +29,8 @@ You can sign up with my referral link <https://m.do.co/c/0d2d40f6a8a1> and get $
 
 ### Requirements
 
-- Terraform installed
-- Ansible installed
+- Terraform installed (Version used: v0.13.0)
+- Ansible installed (Version used: 2.9.12)
 - SSH private and public keys
 - Google Cloud Platform or Digital Ocean account.
 
@@ -157,6 +158,10 @@ $ terraform destroy -auto-approve
 ```
 
 :warning:**Note:** For Digital Ocean, if you dont have a default VPC created in the region used it shows an error to destroy the VPC but no problem, it will destroy the others resources.
+
+### :shield: Security
+
+The service fail2ban has been installed to avoid brute force and block non-authorized users. :ghost::ghost:
 
 ### :coffee: Donations
 
