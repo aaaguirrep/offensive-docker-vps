@@ -4,7 +4,7 @@ resource "google_compute_firewall" "traffic-ingress" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22","8080","80","443"]
+    ports    = ["22","8080","80","443","3128"]
   }
 
   source_ranges = ["0.0.0.0/0"]

@@ -23,6 +23,12 @@ resource "digitalocean_firewall" "traffic-ingress" {
 
   inbound_rule {
     protocol         = "tcp"
+    port_range       = "3128"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol         = "tcp"
     port_range       = "8080"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
