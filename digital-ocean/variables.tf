@@ -1,7 +1,7 @@
 variable "ssh_public_key" {
     description = "Public key"
     type = string
-    default = "../credentials/pentest.pub"
+    default = "../credentials/offensive.pub"
 }
 
 variable "do_token" {
@@ -16,7 +16,7 @@ variable "region" {
 variable "username" {
     description = "Username"
     type = string
-    default = "pentest"
+    default = "offensive"
 }
 
 variable "vps_number" {

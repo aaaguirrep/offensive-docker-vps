@@ -7,7 +7,7 @@ resource "random_id" "instance_id" {
 resource "digitalocean_droplet" "vm_instance" {
   count       = var.vps_number
   image       = "ubuntu-18-04-x64"
-  name        = "pentest-vm-${random_id.instance_id[count.index].hex}"
+  name        = "offensive-docker-vm-${random_id.instance_id[count.index].hex}"
   region      = var.region
   size        = "s-2vcpu-4gb"
   vpc_uuid    = digitalocean_vpc.vpc_network.id
