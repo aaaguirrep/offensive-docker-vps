@@ -1,5 +1,5 @@
 <!-- markdownlint-disable MD033 MD041 -->
-<h2>VPS - Docker for pentest</h2>
+<h2>Offensive Docker VPS</h2>
 
 Create a VPS on Google Cloud Platform or Digital Ocean easily to use [Offensive Docker](https://github.com/aaaguirrep/offensive-docker) and launch the assessments to the targets.
 
