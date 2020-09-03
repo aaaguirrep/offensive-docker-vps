@@ -7,7 +7,7 @@ resource "random_id" "instance_id" {
 // A single Compute Engine instance
 resource "google_compute_instance" "vm_instance" {
   count        = var.vps_number
-  name         = "pentest-vm-${random_id.instance_id[count.index].hex}"
+  name         = "offensive-docker-vm-${random_id.instance_id[count.index].hex}"
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
 

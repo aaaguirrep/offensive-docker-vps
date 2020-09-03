@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD033 MD041 -->
 <h2>VPS - Docker for pentest</h2>
 
-Create a VPS on Google Cloud Platform or Digital Ocean easily with the [docker for pentest](https://github.com/aaaguirrep/pentest) included to launch the assessment to the target.
+Create a VPS on Google Cloud Platform or Digital Ocean easily to use [Offensive Docker](https://github.com/aaaguirrep/offensive-docker) and launch the assessments to the targets.
 
 :tada::tada:**Digital Ocean Bonus**:tada::tada:
 You can sign up with my referral link <https://m.do.co/c/0d2d40f6a8a1> and get $100 free credit to try it out!
@@ -39,7 +39,7 @@ You can sign up with my referral link <https://m.do.co/c/0d2d40f6a8a1> and get $
 #### 1.- Clone the repository
 
 ```console
-git clone --depth 1 https://github.com/aaaguirrep/vps-docker-for-pentest.git vps
+git clone --depth 1 https://github.com/aaaguirrep/offensive-docker-vps.git vps
 cd vps
 ```
 
@@ -55,7 +55,7 @@ cd vps
 
 - Create a new project.
 - Create service account with "Compute Admin" role and download a key in json format in credentials folder.
-- Rename the key to pentest.json
+- Rename the key to gcp.json
 - Enable "Compute Engine API" for the project.
 
 ##### For Digital Ocean
@@ -64,7 +64,7 @@ cd vps
 
 ##### SSH Private and Public keys
 
-- Inside credentials folder run `ssh-keygen -t rsa -f pentest` in the terminal. Empty passphrase is ok.
+- Inside credentials folder run `ssh-keygen -t rsa -f offensive` in the terminal. Empty passphrase is ok.
 - It creates two files: private and public key.
 
 #### 3.- Terraform
@@ -142,7 +142,7 @@ ok: [x.x.x.x] => {
 
 ```Console
 # Access to VPS
-$ ssh pentest@x.x.x.x -i ../credentials/pentest
+$ ssh offensive@x.x.x.x -i ../credentials/offensive
 ```
 
 **Demo**
@@ -175,7 +175,7 @@ Thanks for your donations, are always appreciated.
 
 ### :chart_with_upwards_trend: Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/aaaguirrep/vps-docker-for-pentest.svg)](https://starchart.cc/aaaguirrep/vps-docker-for-pentest)
+[![Stargazers over time](https://starchart.cc/aaaguirrep/offensive-docker-vps.svg)](https://starchart.cc/aaaguirrep/offensive-docker-vps)
 
 ### License
 
