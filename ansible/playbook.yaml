@@ -24,7 +24,7 @@
   tasks:
     - name: Update and install packages
       apt:
-        name: [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common' , 'python3-pip', 'virtualenv', 'python3-setuptools']
+        name: [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common' , 'python3-pip', 'virtualenv', 'python3-setuptools', 'zsh']
         state: present
         update_cache: yes
 
@@ -54,10 +54,110 @@
       pip:
         name: docker
 
-    - name: Download docker for pentest image
+    - name: Download Offensive Docker image
       docker_image:
         name: "{{ docker_image }}"
         source: pull
+
+    - name: Change default shell to zsh
+      user:
+        name: "{{ username }}"
+        shell: /bin/zsh
+
+    - name: Set TERM environment variable
+      lineinfile:
+        dest: /etc/environment
+        line: 'TERM=xterm-256color'
+
+    - name: Clone oh-my-tmux repository
+      git:
+        repo: 'https://github.com/gpakosz/.tmux.git'
+        dest: /home/offensive/.tmux
+        depth: '1'
+        force: yes
+
+    - name: Clone oh-my-zsh repository
+      git:
+        repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
+        dest: /home/offensive/.oh-my-zsh
+        depth: '1'
+        force: yes
+
+    - name: Create a symbolic link for install oh-my-tmux
+      file:
+        src: /home/offensive/.tmux/.tmux.conf
+        dest: /home/offensive/.tmux.conf
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        state: link
+        force: yes
+
+    - name: Copy oh-my-zsh configuration file to .zshrc
+      copy:
+        src: /home/offensive/.tmux/.tmux.conf.local
+        dest: /home/offensive/
+        remote_src: yes
+        owner: "{{ username }}"
+        mode: '0644'
+
+    - name: Change oh-my-zsh ownership, group and permissions
+      file:
+        path: /home/offensive/.oh-my-zsh
+        state: directory
+        recurse: yes
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: '0555'
+
+    - name: Copy oh-my-zsh configuration file to .zshrc
+      copy:
+        src: /home/offensive/.oh-my-zsh/templates/zshrc.zsh-template
+        dest: /home/offensive/.zshrc
+        remote_src: yes
+        owner: "{{ username }}"
+        mode: '0644'
+
+    - name: Download zsh-syntax-highlighting plugin
+      git:
+        repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+        dest: /home/offensive/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+        depth: '1'
+        force: yes
+
+    - name: Download zsh-completions plugin
+      git:
+        repo: 'https://github.com/zsh-users/zsh-completions.git'
+        dest: /home/offensive/.oh-my-zsh/custom/plugins/zsh-completions
+        depth: '1'
+        force: yes
+
+    - name: Download zsh-history-substring-search plugin
+      git:
+        repo: 'https://github.com/zsh-users/zsh-history-substring-search.git'
+        dest: /home/offensive/.oh-my-zsh/custom/plugins/zsh-history-substring-search
+        depth: '1'
+        force: yes
+
+    - name: Download zsh-autosuggestions plugin
+      git:
+        repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+        dest: /home/offensive/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        depth: '1'
+        force: yes
+
+    - name: Enable oh-my-zsh plugins
+      lineinfile:
+        path: /home/offensive/.zshrc
+        regexp: '^plugins=\('
+        line: plugins=(git docker tmux ubuntu colored-man-pages zsh-syntax-highlighting zsh-completions history-substring-search zsh-autosuggestions)
+
+    - name: zsh-completions configuration
+      lineinfile:
+        path: /home/offensive/.zshrc
+        state: present
+        firstmatch: yes
+        insertafter: '^plugins=\('
+        line: autoload -U compinit && compinit
 
     - name: Configuration finished
       debug:
