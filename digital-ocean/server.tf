@@ -27,3 +27,25 @@ data "template_file" "cloud_init_yaml" {
     username = var.username
   }
 }
+
+data "template_file" "dev_hosts" {
+  template = "${file("${path.module}/templates/host.cfg")}"
+  depends_on = [
+    digitalocean_droplet.vm_instance,
+  ]
+  vars= {
+    externalIP = "${digitalocean_droplet.vm_instance.*.ipv4_address[0]}"
+  }
+}
+
+resource "null_resource" "dev-hosts" {
+  triggers= {
+    template_rendered = data.template_file.dev_hosts.rendered
+  }
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.dev_hosts.rendered}' > ../ansible/hosts.yaml"
+  }
+  provisioner "local-exec" {
+    command = "cd ../ansible  && ansible-playbook playbook.yaml "
+  }
+}
