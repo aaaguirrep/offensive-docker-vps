@@ -30,3 +30,35 @@ resource "google_compute_instance" "vm_instance" {
      ssh-keys = "${var.username}:${file(var.ssh_public_key)}"
  }
 }
+
+data "template_file" "dev_hosts" {
+  template = "${file("${path.module}/templates/host.cfg")}"
+  depends_on = [
+    google_compute_instance.vm_instance,
+  ]
+  vars= {
+    externalIP = join("\n", google_compute_instance.vm_instance.*.network_interface.0.access_config.0.nat_ip)
+  }
+}
+
+resource "null_resource" "sleep-before-ansible" {
+  triggers = {
+    template_rendered = data.template_file.dev_hosts.rendered
+  }
+
+  provisioner "local-exec" {
+    command = "sleep 60"
+  }
+}
+
+resource "null_resource" "dev-hosts" {
+  depends_on = [
+    null_resource.sleep-before-ansible,
+  ]
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.dev_hosts.rendered}' > ../ansible/hosts.yaml"
+  }
+  provisioner "local-exec" {
+    command = "cd ../ansible  && ansible-playbook playbook.yaml "
+  }
+}

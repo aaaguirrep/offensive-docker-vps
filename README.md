@@ -15,12 +15,11 @@ You can sign up with my referral link <https://m.do.co/c/0d2d40f6a8a1> and get $
     - [For Google Cloud Platform](#for-google-cloud-platform)
     - [For Digital Ocean](#for-digital-ocean)
     - [SSH Private and Public keys](#ssh-private-and-public-keys)
-  - [3.- Terraform](#3--terraform)
+  - [3.- Full Automation: Terraform and Ansible](#3--full-automation-terraform-and-ansible)
     - [Google Cloud Platform](#google-cloud-platform)
     - [Digital Ocean](#digital-ocean)
-  - [4.- Ansible](#4--ansible)
-  - [5.- Access to VPS](#5--access-to-vps)
-  - [6.- Destroy the VPS](#6--destroy-the-vps)
+  - [4.- Access to VPS](#4--access-to-vps)
+  - [5.- Destroy the VPS](#5--destroy-the-vps)
 - [:shield: Security](#shield-security)
 - [:coffee: Donations](#coffee-donations)
 - [Contributing](#contributing)
@@ -29,7 +28,7 @@ You can sign up with my referral link <https://m.do.co/c/0d2d40f6a8a1> and get $
 
 ### Requirements
 
-- Terraform installed (Version used: v0.13.0)
+- Terraform installed (Version used: v0.13.2)
 - Ansible installed (Version used: 2.9.12)
 - SSH private and public keys
 - Google Cloud Platform or Digital Ocean account.
@@ -67,7 +66,7 @@ cd vps
 - Inside credentials folder run `ssh-keygen -t rsa -f offensive` in the terminal. Empty passphrase is ok.
 - It creates two files: private and public key.
 
-#### 3.- Terraform
+#### 3.- Full Automation: Terraform and Ansible
 
 ##### Google Cloud Platform
 
@@ -82,7 +81,7 @@ Terraform has been successfully initialized!
 
 # Create the resources
 $ terraform apply -auto-approve
-Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 6 added, 0 changed, 0 destroyed.
 Outputs:
 external_ip = x.x.x.x
 ```
@@ -92,7 +91,7 @@ external_ip = x.x.x.x
 **Note:** The instance type and the region used are: n1-standard-1 and us-central1. You can change the values on server.tf and main.tf
 
 **Demo**
-[![asciicast](https://asciinema.org/a/352900.png)](https://asciinema.org/a/352900)
+[![asciicast](https://asciinema.org/a/359398.png)](https://asciinema.org/a/359398)
 
 ##### Digital Ocean
 
@@ -107,7 +106,7 @@ Terraform has been successfully initialized!
 
 # Create the resources
 $ terraform apply -auto-approve
-Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 6 added, 0 changed, 0 destroyed.
 Outputs:
 external_ip = x.x.x.x
 ```
@@ -117,26 +116,9 @@ external_ip = x.x.x.x
 **Note:** The droplet type and the region used are: s-2vcpu-4gb and nyc3. You can change the values on server.tf and variables.tf
 
 **Demo**
-[![asciicast](https://asciinema.org/a/352901.png)](https://asciinema.org/a/352901)
+[![asciicast](https://asciinema.org/a/359408.png)](https://asciinema.org/a/359408)
 
-#### 4.- Ansible
-
-- Enter to ansible folder
-- In hosts.yaml change the x.x.x.x by external_ip value copied.
-- Run the next command:
-
-```console
-$ ansible-playbook playbook.yaml
-TASK [Configuration finished] *******************************************************
-ok: [x.x.x.x] => {
-    "msg": "System configured correctly."
-}
-```
-
-**Demo**
-[![asciicast](https://asciinema.org/a/352903.png)](https://asciinema.org/a/352903)
-
-#### 5.- Access to VPS
+#### 4.- Access to VPS
 
 - In gcp or digital-ocean folder run the next command. Change x.x.x.x by external_ip value copied.
 
@@ -148,7 +130,7 @@ $ ssh offensive@x.x.x.x -i ../credentials/offensive
 **Demo**
 [![asciicast](https://asciinema.org/a/352904.png)](https://asciinema.org/a/352904)
 
-#### 6.- Destroy the VPS
+#### 5.- Destroy the VPS
 
 - In gcp or digital-ocean folder run the next command.
 
@@ -167,7 +149,7 @@ The service fail2ban has been installed to avoid brute force and block non-autho
 
 Thanks for your donations, are always appreciated.
 
-<a href="https://www.buymeacoffee.com/aaaguirrep" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 23px !important; width: 100px !important;" ></a>
+[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/aaaguirrep)
 
 ### Contributing
 

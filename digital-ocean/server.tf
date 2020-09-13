@@ -38,9 +38,8 @@ data "template_file" "dev_hosts" {
   }
 }
 
-
 resource "null_resource" "sleep-before-ansible" {
-  triggers= {
+  triggers = {
     template_rendered = data.template_file.dev_hosts.rendered
   }
 
