@@ -28,7 +28,7 @@ You can sign up with my referral link <https://m.do.co/c/0d2d40f6a8a1> and get $
 
 ### Requirements
 
-- Terraform installed (Version used: v0.13.2)
+- Terraform installed (Version used: v0.13.4)
 - Ansible installed (Version used: 2.9.12)
 - SSH private and public keys
 - Google Cloud Platform or Digital Ocean account.

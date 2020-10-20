@@ -32,7 +32,7 @@ resource "google_compute_instance" "vm_instance" {
 }
 
 data "template_file" "dev_hosts" {
-  template = "${file("${path.module}/templates/host.cfg")}"
+  template = file("${path.module}/templates/host.cfg")
   depends_on = [
     google_compute_instance.vm_instance,
   ]

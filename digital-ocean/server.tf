@@ -29,7 +29,7 @@ data "template_file" "cloud_init_yaml" {
 }
 
 data "template_file" "dev_hosts" {
-  template = "${file("${path.module}/templates/host.cfg")}"
+  template = file("${path.module}/templates/host.cfg")
   depends_on = [
     digitalocean_droplet.vm_instance,
   ]
