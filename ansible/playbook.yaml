@@ -72,21 +72,21 @@
     - name: Clone oh-my-tmux repository
       git:
         repo: 'https://github.com/gpakosz/.tmux.git'
-        dest: /home/offensive/.tmux
+        dest: /home/{{ username }}/.tmux
         depth: '1'
         force: yes
 
     - name: Clone oh-my-zsh repository
       git:
         repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
-        dest: /home/offensive/.oh-my-zsh
+        dest: /home/{{ username }}/.oh-my-zsh
         depth: '1'
         force: yes
 
     - name: Create a symbolic link for install oh-my-tmux
       file:
-        src: /home/offensive/.tmux/.tmux.conf
-        dest: /home/offensive/.tmux.conf
+        src: /home/{{ username }}/.tmux/.tmux.conf
+        dest: /home/{{ username }}/.tmux.conf
         owner: "{{ username }}"
         group: "{{ username }}"
         state: link
@@ -94,15 +94,15 @@
 
     - name: Copy oh-my-zsh configuration file to .zshrc
       copy:
-        src: /home/offensive/.tmux/.tmux.conf.local
-        dest: /home/offensive/
+        src: /home/{{ username }}/.tmux/.tmux.conf.local
+        dest: /home/{{ username }}/
         remote_src: yes
         owner: "{{ username }}"
         mode: '0644'
 
     - name: Change oh-my-zsh ownership, group and permissions
       file:
-        path: /home/offensive/.oh-my-zsh
+        path: /home/{{ username }}/.oh-my-zsh
         state: directory
         recurse: yes
         owner: "{{ username }}"
@@ -111,8 +111,8 @@
 
     - name: Copy oh-my-zsh configuration file to .zshrc
       copy:
-        src: /home/offensive/.oh-my-zsh/templates/zshrc.zsh-template
-        dest: /home/offensive/.zshrc
+        src: /home/{{ username }}/.oh-my-zsh/templates/zshrc.zsh-template
+        dest: /home/{{ username }}/.zshrc
         remote_src: yes
         owner: "{{ username }}"
         mode: '0644'
@@ -120,40 +120,40 @@
     - name: Download zsh-syntax-highlighting plugin
       git:
         repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
-        dest: /home/offensive/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+        dest: /home/{{ username }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
         depth: '1'
         force: yes
 
     - name: Download zsh-completions plugin
       git:
         repo: 'https://github.com/zsh-users/zsh-completions.git'
-        dest: /home/offensive/.oh-my-zsh/custom/plugins/zsh-completions
+        dest: /home/{{ username }}/.oh-my-zsh/custom/plugins/zsh-completions
         depth: '1'
         force: yes
 
     - name: Download zsh-history-substring-search plugin
       git:
         repo: 'https://github.com/zsh-users/zsh-history-substring-search.git'
-        dest: /home/offensive/.oh-my-zsh/custom/plugins/zsh-history-substring-search
+        dest: /home/{{ username }}/.oh-my-zsh/custom/plugins/zsh-history-substring-search
         depth: '1'
         force: yes
 
     - name: Download zsh-autosuggestions plugin
       git:
         repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-        dest: /home/offensive/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        dest: /home/{{ username }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
         depth: '1'
         force: yes
 
     - name: Enable oh-my-zsh plugins
       lineinfile:
-        path: /home/offensive/.zshrc
+        path: /home/{{ username }}/.zshrc
         regexp: '^plugins=\('
         line: plugins=(git docker tmux ubuntu colored-man-pages zsh-syntax-highlighting zsh-completions history-substring-search zsh-autosuggestions)
 
     - name: zsh-completions configuration
       lineinfile:
-        path: /home/offensive/.zshrc
+        path: /home/{{ username }}/.zshrc
         state: present
         firstmatch: yes
         insertafter: '^plugins=\('
